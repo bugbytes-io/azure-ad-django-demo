@@ -2,6 +2,16 @@
 
 {% block content %}
 
-Hello
+{% if request.identity_context_data.authenticated %}
+    <h1>You are logged in, {{ request.identity_context_data.username }}!</h1>
+    <a href="{% url 'sign_out' %}">Logout</a>
+{% else %}
+    <h1>You are logged out!</h1>
+    <a href="{% url 'sign_in' %}">Login</a>
+{% endif %}
 
+
+<div class="mt-4">
+    <a href="{% url 'secret' %}">Secret</a>
+</div>
 {% endblock %}
